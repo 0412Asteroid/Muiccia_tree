@@ -13,14 +13,6 @@ public class KobeLogoPrinter {
         }
     }
 
-    private int nLogoLength(int rowNum) {
-        return rowNum * 2 + 1;
-    }
-
-    private int middleSpaceLength(int rowNum) {
-        return rowNum * 2 - 1;
-    }
-
     private void printLogoRow(int logoRow) {
         String row = "";
         // insert front space
@@ -28,15 +20,33 @@ public class KobeLogoPrinter {
         for (int i = 0; i < frontSpaceLength; i++) {
             row += space;
         }
-        // insert first symbol
+        // insert first symbol 1
         row += symbol;
-        // insert middle space
-        int middleSpaceLength = size-2;
-        for (int i = 0; i < middleSpaceLength; i++) {
-            row += space;
+        row = rowAfterAppendedMiddleSpaceAndEndSymbol(row, logoRow);
+        if(logoRow != size-1){
+            // middle space
+            int middleSpaceLength =( size - 1 - logoRow)*2 - 1;
+            for (int i = 0; i < middleSpaceLength; i++) {
+                row += space;
+            }
+
+            // start symbol 2
+            row += symbol;
         }
-        // end symbol
-        row += symbol;
+        row = rowAfterAppendedMiddleSpaceAndEndSymbol(row, logoRow);
         System.out.println(row);
+    }
+
+    String rowAfterAppendedMiddleSpaceAndEndSymbol(String row, int logoRow){
+        if (logoRow != 0){
+            // insert middle space 1
+            int middleSpaceLength = logoRow * 2 - 1;
+            for (int i = 0; i < middleSpaceLength; i++) {
+                row += space;
+            }
+            // end symbol 1
+            row += symbol;
+        }
+        return row;
     }
 }
